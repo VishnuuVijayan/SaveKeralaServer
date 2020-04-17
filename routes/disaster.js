@@ -3,28 +3,28 @@ let Disaster = require("../models/disasteradd.model");
 
 Router.get("/", (req, res) => {
   Disaster.find()
-    .then(disasters => res.json(disasters))
-    .catch(err => res.status(400).json("Error: " + err));
+    .then((disasters) => res.json(disasters))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 Router.get("/isactive/", (req, res) => {
   const query = { is_active: "true" };
   Disaster.find(query)
-    .then(disasters => res.json(disasters))
-    .catch(err => res.status(400).json("Error: " + err));
+    .then((disasters) => res.json(disasters))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 Router.get("/:name", (req, res) => {
   const query = { disaster_name: req.params.name };
   Disaster.find(query)
-    .then(disasters => res.json(disasters))
-    .catch(err => res.status(400).json("Error: " + err));
+    .then((disasters) => res.json(disasters))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
-Router.get("/:id", (req, res, err) => {
-  Disaster.findById(req.body.id)
-    .then(disaster => res.json(disaster))
-    .catch(err => res.status(400).json("Error: " + err));
+Router.get("/details/:id", (req, res, err) => {
+  Disaster.findById(req.params.id)
+    .then((disaster) => res.json(disaster))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 // Router.route("/activedisasters").get((req, res) => {
@@ -36,7 +36,7 @@ Router.get("/:id", (req, res, err) => {
 
 Router.post("/update/:id", (req, res, err) => {
   Disaster.findById(req.params.id)
-    .then(disaster => {
+    .then((disaster) => {
       disaster.description = req.body.description;
       disaster.disaster_edate = Date.parse(req.body.disaster_edate);
       // disaster.description = req.body.description;
@@ -50,9 +50,9 @@ Router.post("/update/:id", (req, res, err) => {
       disaster
         .save()
         .then(() => res.json("Disaster Updated!"))
-        .catch(err => res.status(400).json("Error : " + err));
+        .catch((err) => res.status(400).json("Error : " + err));
     })
-    .catch(err => res.status(400).json("Error:" + err));
+    .catch((err) => res.status(400).json("Error:" + err));
 });
 
 Router.post("/add", (req, res) => {
@@ -85,7 +85,7 @@ Router.post("/add", (req, res) => {
     people_affected,
     span_area,
     is_active,
-    imgsrc
+    imgsrc,
   });
 
   newDisaster

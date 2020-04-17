@@ -15,18 +15,18 @@ let User = require("../models/userslist.model");
 //     .catch(err => res.status(400).json("Error: " + err));
 // });
 
-Router.post("/", async (req, res, err) => {
+Router.post("/", (req, res, err) => {
   const { email, password } = req.body;
 
-  await User.findOne({ email }).then((user) => {
+  User.findOne({ email }).then(user => {
     if (!user) return res.status(400).json({ msg: "User Does not Exist" });
 
-    bcrypt.compare(password, user.password).then((isMatch) => {
+    bcrypt.compare(password, user.password).then(isMatch => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
 
       jwt.sign(
         {
-          id: user.id,
+          id: user.id
           // first_name: user.first_name,
           // last_name: user.last_name
         },
@@ -40,8 +40,8 @@ Router.post("/", async (req, res, err) => {
               // last_name: user.first_name,
               // last_name: user.last_name,
               email: user.email,
-              id: user._id,
-            },
+              id: user._id
+            }
           });
         }
       );
@@ -87,10 +87,10 @@ Router.post("/", async (req, res, err) => {
 //   });
 // });
 
-Router.get("/user", auth, async (req, res, err) => {
-  await User.findById(req.user.id)
+Router.get("/user", auth, (req, res, err) => {
+  User.findById(req.user.id)
     .select("-password")
-    .then((user) => res.json(user));
+    .then(user => res.json(user));
   // .catch(err => res.status(400).json({ msg: e.message }));
 });
 

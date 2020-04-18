@@ -13,13 +13,26 @@ Router.route("/add").post((req, res) => {
     panchayat,
     secratary_name,
     email,
-    contact
+    contact,
   });
 
   newSecretary
     .save()
     .then(() => res.json("Causality Added"))
     .catch(() => res.status(400).json("Error: " + err));
+});
+
+Router.route("/").get(async (req, res) => {
+  await Secretary.find()
+    .then((secretary) => res.json(secretary))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+Router.route("/:district").get(async (req, res) => {
+  const query = { district: req.params.district };
+  await Secretary.find(query)
+    .then((secretary) => res.json(secretary))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = Router;

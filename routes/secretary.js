@@ -35,4 +35,10 @@ Router.route("/:district").get(async (req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+Router.route("/details/:id").get(async (req, res) => {
+  await Secretary.findById(req.params.id)
+    .then((secretary) => res.json(secretary))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 module.exports = Router;

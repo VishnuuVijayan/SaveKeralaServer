@@ -7,6 +7,12 @@ Router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+Router.route("/:id").get((req, res) => {
+  Tahsildar_list.findById(req.params.id)
+    .then((tahsildar_list) => res.json(tahsildar_list))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 Router.route("/list/districts").get((req, res) => {
   Tahsildar_list.find({}, { district: 1 })
     .then((tahsildar_list) => res.json(tahsildar_list))

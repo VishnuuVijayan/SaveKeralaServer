@@ -26,20 +26,26 @@ let Collector_list = require("../models/collectorlist.model");
 
 Router.route("/").get((req, res) => {
   Collector_list.find()
-    .then(collector_lists => res.json(collector_lists))
-    .catch(err => res.status(400).json("Error: " + err));
+    .then((collector_lists) => res.json(collector_lists))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+Router.route("/details/:id").get((req, res) => {
+  Collector_list.findById(req.params.id)
+    .then((collector_lists) => res.json(collector_lists))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 Router.route("/:district").get((req, res) => {
   const query = { district: req.params.district };
   Collector_list.find(query)
-    .then(collector_lists => res.json(collector_lists))
-    .catch(err => res.status(400).json("Error: " + err));
+    .then((collector_lists) => res.json(collector_lists))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 Router.route("/update/:id").post((req, res, err) => {
   Collector_list.findById(req.params.id)
-    .then(collector_list => {
+    .then((collector_list) => {
       // const user_id = Number(req.body.user_id);
       collector_list.email = req.body.email;
       collector_list.contact = Number(req.body.contact);
@@ -51,14 +57,14 @@ Router.route("/update/:id").post((req, res, err) => {
       collector_list
         .save()
         .then(() => res.json("Collector Updated!"))
-        .catch(err => res.status(400).json("Error : " + err));
+        .catch((err) => res.status(400).json("Error : " + err));
     })
-    .catch(err => res.status(400).json("Error:" + err));
+    .catch((err) => res.status(400).json("Error:" + err));
 });
 
 Router.route("/update/:id").post((req, res, err) => {
   Collector_list.findById(req.params.id)
-    .then(collector_list => {
+    .then((collector_list) => {
       collector_list.collector_fname = req.body.collector_fname;
       collector_list.collector_lname = req.body.collector_lname;
       collector_list.contact = req.body.contact;
@@ -67,9 +73,9 @@ Router.route("/update/:id").post((req, res, err) => {
       collector_list
         .save()
         .then(() => res.json("Collector Updated!"))
-        .catch(err => res.status(400).json("Error : " + err));
+        .catch((err) => res.status(400).json("Error : " + err));
     })
-    .catch(err => res.status(400).json("Error:" + err));
+    .catch((err) => res.status(400).json("Error:" + err));
 });
 
 module.exports = Router;

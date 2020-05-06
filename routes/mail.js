@@ -6,7 +6,16 @@ Router.get("/", async (req, res) => {
   if (req.body.constructor === Object && Object.keys(req.body).length === 0) {
     res.send("Please add some request");
   } else {
-    const { name, contact, latitude, longitude } = await req.body;
+    const {
+      name,
+      contact,
+      latitude,
+      longitude,
+      district,
+      disaster,
+      emergency,
+    } = await req.body;
+
     console.log(name);
     let msg =
       "<h1>New Emergency Reported</h1><br/>Name: " +
@@ -17,7 +26,14 @@ Router.get("/", async (req, res) => {
       latitude +
       "," +
       longitude +
+      "<br/>District : " +
+      district +
+      "<br/>Disaster :" +
+      disaster +
+      "<br/>Emergency Type :" +
+      emergency +
       "<br/>";
+
     let transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {

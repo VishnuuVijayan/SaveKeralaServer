@@ -14,7 +14,7 @@ const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
 const connection = mongoose.connection;
@@ -25,14 +25,6 @@ connection.once("open", () => {
 app.get("/", (req, res) => {
   res.send("<h1>Welcome to SaveKerala Cloud Server</h1>");
 });
-
-// app.get("/mail", (req, res) => {
-//   if (!req.body) {
-//     res.send(mailer(req.body));
-//   } else {
-//     console.log("Please send some request!!");
-//   }
-// });
 
 const disasterRouter = require("./routes/disaster");
 const causalityRouter = require("./routes/causality");

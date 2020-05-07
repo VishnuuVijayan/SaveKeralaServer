@@ -38,7 +38,9 @@ Router.get("/", async (req, res) => {
       "<br/>";
 
     let transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD,

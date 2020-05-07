@@ -13,7 +13,8 @@ Router.get("/", async (req, res) => {
       longitude,
       district,
       disaster,
-      emergency,
+      service,
+      addMsg,
     } = await req.body;
 
     console.log(name);
@@ -31,7 +32,9 @@ Router.get("/", async (req, res) => {
       "<br/>Disaster :" +
       disaster +
       "<br/>Emergency Type :" +
-      emergency +
+      service +
+      "<br/>Additional Message: " +
+      addMsg +
       "<br/>";
 
     let transporter = nodemailer.createTransport({
@@ -42,8 +45,8 @@ Router.get("/", async (req, res) => {
       },
     });
     let mailOptions = {
-      from: "vishnu08ptb@gmail.com",
-      to: "mailforvishnuu@gmail.com",
+      from: "moshe.murphy64@ethereal.email",
+      to: "savekerala20@gmail.com",
       subject: "Request from " + name,
       html: msg,
     };

@@ -38,23 +38,21 @@ Router.get("/", async (req, res) => {
       "<br/>";
 
     let transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
+      service: "gmail",
       auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD,
       },
     });
     let mailOptions = {
-      from: "moshe.murphy64@ethereal.email",
-      to: "savekerala20@gmail.com",
+      from: "savekeralaproject@gmail.com",
+      to: "savekeralaproject@gmail.com",
       subject: "Request from " + name,
       html: msg,
     };
     transporter.sendMail(mailOptions, function (err, data) {
       if (err) {
-        res.send("Error Occured: ", err);
+        res.status(400).send("Error Occured: ", err);
       } else {
         res.send("Request Send to Admin, You'll be contacted Shortly.");
       }

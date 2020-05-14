@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const mailer = require("./functions/sendMail");
 require("dotenv").config();
 
 const app = express();
@@ -34,6 +33,7 @@ const tahsildar_listRouter = require("./routes/tahsildar_list");
 const mailRouter = require("./routes/mail");
 const authRouter = require("./routes/auth");
 const usersRouter = require("./routes/users");
+const adminRouter = require("./routes/admin");
 app.use("/disaster", disasterRouter);
 app.use("/causality", causalityRouter);
 app.use("/secretary", secretaryRouter);
@@ -42,6 +42,7 @@ app.use("/tahsildarlist", tahsildar_listRouter);
 app.use("/users", usersRouter);
 app.use("/auth", authRouter);
 app.use("/mail", mailRouter);
+app.use("/admin", adminRouter);
 
 app.listen(port, () => {
   console.log("Server is running at port 5000");

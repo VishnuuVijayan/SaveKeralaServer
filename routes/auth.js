@@ -18,10 +18,10 @@ let User = require("../models/userslist.model");
 Router.post("/", (req, res, err) => {
   const { email, password } = req.body;
 
-  User.findOne({ email }).then(user => {
+  User.findOne({ email }).then((user) => {
     if (!user) return res.status(400).json({ msg: "User Does not Exist" });
 
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
 
       jwt.sign(
@@ -90,8 +90,8 @@ Router.post("/", (req, res, err) => {
 Router.get("/user", auth, (req, res, err) => {
   User.findById(req.user.id)
     .select("-password")
-    .then(user => res.json(user));
-  // .catch(err => res.status(400).json({ msg: e.message }));
+    .then((user) => res.json(user));
+  // .catch(err => res.status(400). json({ msg: e.message }));
 });
 
 //   newUser

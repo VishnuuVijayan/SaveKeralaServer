@@ -13,7 +13,7 @@ Router.route("/add").post((req, res) => {
     panchayat,
     secratary_name,
     email,
-    contact,
+    contact
   });
 
   newSecretary
@@ -31,6 +31,13 @@ Router.route("/").get(async (req, res) => {
 Router.route("/:district").get(async (req, res) => {
   const query = { district: req.params.district };
   await Secretary.find(query)
+    .then((secretary) => res.json(secretary))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+Router.route("/panchayat_list/:district").get(async (req, res) => {
+  const query = { district: req.params.district };
+  await Secretary.find(query, { panchayat: 1 })
     .then((secretary) => res.json(secretary))
     .catch((err) => res.status(400).json("Error: " + err));
 });

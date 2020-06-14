@@ -46,6 +46,7 @@ Router.post("/update/:id", (req, res, err) => {
       disaster.span_area = Number(req.body.span_area);
       disaster.imgsrc = req.body.imgsrc;
       disaster.is_active = Boolean(req.body.is_active);
+      disaster.mobThumbnail = req.body.mobThumbnail;
 
       disaster
         .save()
@@ -85,7 +86,7 @@ Router.post("/add", (req, res) => {
     people_affected,
     span_area,
     is_active,
-    imgsrc,
+    imgsrc
   });
 
   newDisaster

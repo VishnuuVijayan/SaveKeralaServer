@@ -17,7 +17,8 @@ const disasterSchema = new Schema(
     people_affected: { type: Number, trim: true },
     span_area: { type: Number, trim: true },
     is_active: { type: Boolean, required: true },
-    imgsrc: { type: String, required: true, trim: true }
+    imgsrc: { type: String, required: true, trim: true },
+    mobTHumbnail: { type: String, required: true, trim: true }
   },
   {
     timestamps: true
